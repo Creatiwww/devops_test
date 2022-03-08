@@ -6,14 +6,17 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
+
 	"github.com/go-redis/redis/v8"
 	"github.com/julienschmidt/httprouter"
 	"go.uber.org/zap"
-	"time"
+
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 type server struct {
-	redis redis.UniversalClient
+	redis  redis.UniversalClient
 	logger *zap.Logger
 }
 
@@ -30,11 +33,17 @@ func main() {
 	})
 
 	srv := &server{
-		redis: rdb,
+		redis:  rdb,
 		logger: logger,
 	}
 
 	router := httprouter.New()
+
+	// expose Prometheus metrics
+	go func() {
+		http.Handle("/metrics", promhttp.Handler())
+		http.ListenAndServe(":9000", nil)
+	}()
 
 	router.GET("/", srv.indexHandler)
 

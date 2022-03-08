@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-test-redis-expose-service
+spec:
+  selector:
+    app: Redis
+  ports:
+#  port of the service
+  - protocol: TCP
+    port: 9121
+#  targets TCP port on any Pod with the label equal to selector
+    targetPort: 9121
+    # name: redis
+  type: LoadBalancer

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-test-go-metrics-expose-service
+spec:
+  selector:
+    app: App
+  ports:
+#  port of the service
+  - protocol: TCP
+    port: 9000
+#  targets TCP port on any Pod with the label equal to selector
+    targetPort: 9000
+  type: LoadBalancer

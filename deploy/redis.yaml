@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-test-redis-service
+  labels:
+    app: Redis
+spec:
+  type: NodePort
+  ports:
+#  port of the service
+  - port: 6379
+#  targets TCP port on any Pod with the label equal to selector
+    targetPort: 6379
+    protocol: TCP
+    name: redis
+  selector:
+    app: Redis
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deployment
+spec:
+  selector:
+    matchLabels:
+      app: Redis
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: Redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:alpine
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 6379
+# ---  sidecar
+      - name: redis-exporter
+        image: oliver006/redis_exporter
+        imagePullPolicy: Always
+        env:
+        - name: REDIS_ADDR
+          value: "redis:6379"
+        ports:
+        - containerPort: 9121

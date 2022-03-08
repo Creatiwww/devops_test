@@ -1,0 +1,22 @@
+global:
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  evaluation_interval: 15s
+scrape_configs:
+- job_name: prometheus
+  metrics_path: /metrics
+  scheme: http
+  static_configs:
+  - targets: ['localhost:9090']
+- job_name: redis-exporter
+  metrics_path: /metrics
+  scheme: http
+  static_configs:
+  - targets:
+    - 'redis-exporter:9121'
+- job_name: goapp
+  metrics_path: /metrics
+  scheme: http
+  static_configs:
+  - targets:
+    - 'app:9000'

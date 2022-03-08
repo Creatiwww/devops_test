@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-test-app-service
+  labels:
+    app: App
+spec:
+  type: NodePort
+  ports:
+#  port of the service
+  - port: 8080
+#  targets TCP port on any Pod with the label equal to selector
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: App
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-test-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: App
+  template:
+    metadata:
+      labels:
+        app: App
+    spec:
+      containers:
+      - name: app
+        image: creatiwww/devops_test_faraway:latest
+        env:
+        - name: REDIS_ADDR
+          value: "devops-test-redis-service:6379"
+        ports:
+        - name: time
+          containerPort: 8080
+          name: metrics
+        - containerPort: 9000
