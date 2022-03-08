@@ -16,23 +16,3 @@ spec:
             name: devops-test-app-service
             port:
               number: 8080
-  # -------------------------
-  # - http:
-  #     paths:
-  #     - path: /redis-exporter
-  #       pathType: Prefix
-  #       backend:
-  #         service:
-  #           name: devops-test-redis-service
-  #           port:
-  #             number: 9121
-  # # -------------------------
-  # - http:
-  #     paths:
-  #     - path: /metrics
-  #       pathType: Prefix
-  #       backend:
-  #         service:
-  #           name: devops-test-redis-service
-  #           port:
-  #             number: 9121
