@@ -150,16 +150,16 @@ for monitoring purpose we will import pre-created by comunity doshboards for Red
 ..*Prometheus targets:
 ![Alt text](/images/prometheus-targets-ok.png")
 ..*Grafana Redis dashboard:
-![Alt text](/images/redis-grafana-ok")
+![Alt text](/images/redis-grafana-ok.png")
 ..*Grafana Go App dashboard:
-![Alt text](/images/go-processes-grafana-ok")
+![Alt text](/images/go-processes-grafana-ok.png")
 *on failure:
 ..*Prometheus targets:
 ![Alt text](/images/prometheus-targets-error.png")
 ..*Grafana Redis dashboard:
-![Alt text](/images/redis-grafana-error")
+![Alt text](/images/redis-grafana-error.png")
 ..*Grafana Go App dashboard:
-![Alt text](/images/go-processes-grafana-error")
+![Alt text](/images/go-processes-grafana-error.png")
 
 **notes:**
 Grafana login/pass: admin/admin
